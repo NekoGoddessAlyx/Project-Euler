@@ -11,7 +11,8 @@ abstract class Solution(val problemNumber: Int) {
 
 // solutions map, ensure new solutions are added here
 val solutions = mapOf(
-    1 to Solution0001()
+    1 to Solution0001(),
+    2 to Solution0002(),
 )
 
 fun main() {
