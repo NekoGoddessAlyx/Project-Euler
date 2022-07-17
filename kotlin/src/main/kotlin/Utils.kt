@@ -5,7 +5,7 @@ fun fibGenerator() = sequence {
     var b = 1
 
     while (true) {
-        var next = a + b
+        val next = a + b
         a = b
         b = next
         yield(next)
