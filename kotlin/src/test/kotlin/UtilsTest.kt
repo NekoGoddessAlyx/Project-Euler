@@ -10,6 +10,8 @@ class UtilsTest {
 
     @Test fun testFactorize() {
         assertContentEquals(listOf(2, 2, 3, 3, 31), factorize(1116))
+        assertContentEquals(listOf(2, 2, 5), factorize(20))
+        assertContentEquals(listOf(19), factorize(19))
     }
 
 }
