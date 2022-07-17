@@ -13,6 +13,7 @@ abstract class Solution(val problemNumber: Int) {
 val solutions = mapOf(
     1 to Solution0001(),
     2 to Solution0002(),
+    3 to Solution0003(),
 )
 
 fun main() {

@@ -11,3 +11,31 @@ fun fibGenerator() = sequence {
         yield(next)
     }
 }
+
+fun sqrt(n: Long): Long = kotlin.math.sqrt(n.toDouble()).toLong()
+
+fun factorize(n: Long): List<Long> {
+    var number = n
+    val primeFactors = mutableListOf<Long>()
+
+    // remove the 2s until the number is odd
+    while (number % 2 == 0L) {
+        primeFactors += 2L
+        number /= 2L
+    }
+
+    // number is now odd, increment by 2
+    val factorizationEnd = sqrt(n)
+    var factor = 3L
+
+    while (factor <= factorizationEnd) {
+        while (number % factor == 0L) {
+            primeFactors += factor
+            number /= factor
+        }
+
+        factor += 2
+    }
+
+    return primeFactors
+}
