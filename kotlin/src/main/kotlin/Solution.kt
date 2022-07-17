@@ -20,6 +20,7 @@ val solutions = mapOf(
     4 to Solution0004(),
     5 to Solution0005(),
     6 to Solution0006(),
+    7 to Solution0007(),
 )
 
 fun main() {

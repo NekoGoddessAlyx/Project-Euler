@@ -14,4 +14,9 @@ class UtilsTest {
         assertContentEquals(listOf(19), factorize(19))
     }
 
+    @Test fun testPrimeGenerator() {
+        val primeGenerator = primeGenerator()
+        assertContentEquals(listOf(2, 3, 5, 7, 11, 13), primeGenerator.take(6).toList())
+    }
+
 }

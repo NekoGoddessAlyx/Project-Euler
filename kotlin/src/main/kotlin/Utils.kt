@@ -73,3 +73,31 @@ fun factorizeMap(n: Long): Map<Long, Long> {
 
     return primeFactors
 }
+
+/** Prime number sequence generator through brute force */
+fun primeGenerator(): Sequence<Long> = sequence {
+    yield(2L)
+
+    var number = 3L
+
+    while (true) {
+        if (isPrime(number)) yield(number)
+
+        number += 2L
+    }
+}
+
+/** Optimized test for prime numbers */
+fun isPrime(n: Long): Boolean {
+    if (n == 2L || n == 3L) return true
+
+    if (n <= 1L || n % 2L == 0L || n % 3L == 0L) return false
+
+    var i = 5
+    while (i * i <= n) {
+        if (n % i == 0L || n % (i + 2L) == 0L) return false
+        i += 6
+    }
+
+    return true
+}
