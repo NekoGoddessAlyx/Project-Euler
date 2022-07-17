@@ -1,8 +1,8 @@
 class Solution0004: Solution(4) {
 
     override fun solve(): String {
-        return (0..999)
-            .flatMap { a -> (0..999).map { b -> a * b } }
+        return (100..999)
+            .flatMap { a -> (a..999).map { b -> a * b } }
             .filter { it.isPalindrome() }
             .maxOf { it }
             .toString()
