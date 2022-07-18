@@ -1,3 +1,6 @@
+import kotlin.math.ceil
+import kotlin.math.sqrt
+
 /** Fibonacci sequence generator starting with 1 and 2 */
 fun fibGenerator() = sequence {
     // seed values (will result in the first number being 1 and the second number being 2
@@ -12,7 +15,7 @@ fun fibGenerator() = sequence {
     }
 }
 
-fun sqrt(n: Long): Long = kotlin.math.sqrt(n.toDouble()).toLong()
+fun sqrt(n: Long): Long = sqrt(n.toDouble()).toLong()
 
 /** Returns a list of all prime factors of a number */
 fun getPrimeFactors(n: Long): Map<Long, Long> {
@@ -44,6 +47,40 @@ fun getPrimeFactors(n: Long): Map<Long, Long> {
     return primeFactors
 }
 
+fun getDivisors(n: Long): List<Long> {
+    val factors = mutableListOf(1L)
+
+    var factor = 2L
+    val end = ceil(sqrt(n.toDouble())).toLong()
+    while (factor <= end) {
+        if (n % factor == 0L) {
+            factors += factor
+            factors += n / factor
+        }
+        factor++
+    }
+
+    factors += n
+    factors.sort()
+    return factors.distinct()
+}
+
+fun getNumberOfDivisors(n: Long): Long {
+    var numFactors = 0L
+    var factor = 1L
+
+    val end = ceil(sqrt(n.toDouble())).toLong()
+    while (factor < end) {
+        if (n % factor == 0L) numFactors += 2
+        factor++
+    }
+
+    // take care of square numbers
+    if (sqrt(n) * sqrt(n) == n) numFactors++
+
+    return numFactors
+}
+
 /** Prime number sequence generator through brute force */
 fun primeGenerator(): Sequence<Long> = sequence {
     yield(2L)
@@ -70,4 +107,15 @@ fun isPrime(n: Long): Boolean {
     }
 
     return true
+}
+
+fun triangleNumberGenerator() = sequence<Long> {
+    var previousTotal = 0L
+    var index = 1L
+
+    while (true) {
+        previousTotal += index
+        index++
+        yield(previousTotal)
+    }
 }
