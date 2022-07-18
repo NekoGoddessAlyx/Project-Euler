@@ -1,14 +1,13 @@
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvFileSource
 
 class SolutionTest {
 
-    @Test fun test0001() { assertEquals("233168"    , Solution0001().solve()) }
-    @Test fun test0002() { assertEquals("4613732"   , Solution0002().solve()) }
-    @Test fun test0003() { assertEquals("6857"      , Solution0003().solve()) }
-    @Test fun test0004() { assertEquals("906609"    , Solution0004().solve()) }
-    @Test fun test0005() { assertEquals("232792560" , Solution0005().solve()) }
-    @Test fun test0006() { assertEquals("25164150"  , Solution0006().solve()) }
-    @Test fun test0007() { assertEquals("104743"    , Solution0007().solve()) }
+    @ParameterizedTest(name = "Problem {0}")
+    @CsvFileSource(files = ["../solutions.csv"], numLinesToSkip = 1)
+    fun testSolutions(problemNumber: String, solution: String) {
+        assertEquals(solution, getSolution(problemNumber.toInt())?.solve())
+    }
 
 }
