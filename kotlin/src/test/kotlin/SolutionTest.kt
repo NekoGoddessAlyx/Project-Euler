@@ -5,7 +5,7 @@ import org.junit.jupiter.params.provider.CsvFileSource
 class SolutionTest {
 
     @ParameterizedTest(name = "Problem {0}")
-    @CsvFileSource(files = ["../solutions.csv"], numLinesToSkip = 1)
+    @CsvFileSource(files = ["../solutions.csv"])
     fun testSolutions(problemNumber: String, solution: String) {
         assertEquals(solution, getSolution(problemNumber.toInt())?.solve())
     }
