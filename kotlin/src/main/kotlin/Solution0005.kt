@@ -20,7 +20,7 @@ class Solution0005 : Solution(5) {
         val primeFactorsMap = mutableMapOf<Long, Long>()
 
         numbers.forEach {
-            val factors = factorizeMap(it)
+            val factors = getPrimeFactors(it)
             factors.forEach { (k, v) -> primeFactorsMap.merge(k, v) { v1, v2 -> max(v1, v2)} }
         }
 

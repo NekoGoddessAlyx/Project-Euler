@@ -14,38 +14,8 @@ fun fibGenerator() = sequence {
 
 fun sqrt(n: Long): Long = kotlin.math.sqrt(n.toDouble()).toLong()
 
-/** Returns a list of all prime factors of a number (including repeated factors) */
-fun factorize(n: Long): List<Long> {
-    var number = n
-    val primeFactors = mutableListOf<Long>()
-
-    // remove the 2s until the number is odd
-    while (number % 2 == 0L) {
-        primeFactors += 2L
-        number /= 2L
-    }
-
-    // number is now odd, increment by 2
-    val factorizationEnd = sqrt(n)
-    var factor = 3L
-
-    while (factor <= factorizationEnd) {
-        while (number % factor == 0L) {
-            primeFactors += factor
-            number /= factor
-        }
-
-        factor += 2
-    }
-
-    // handle the case of prime numbers greater than 2
-    if (number > 2) primeFactors += number
-
-    return primeFactors
-}
-
-/** Returns a list of all prime factors of a number as a map */
-fun factorizeMap(n: Long): Map<Long, Long> {
+/** Returns a list of all prime factors of a number */
+fun getPrimeFactors(n: Long): Map<Long, Long> {
     var number = n
     val primeFactors = mutableMapOf<Long, Long>()
 
