@@ -49,4 +49,15 @@ class UtilsTest {
         assertContentEquals(listOf(1L, 3L, 6L, 10L, 15L, 21L, 28L), triangleGenerator.take(7).toList())
     }
 
+    @Test fun testCollatzSequenceGenerator() {
+        val collatzSequenceGenerator = collatzSequenceGenerator(13L)
+        assertContentEquals(listOf(13L, 40L, 20L, 10L, 5L, 16L, 8L, 4L, 2L, 1L), collatzSequenceGenerator.toList())
+    }
+
+    @Test fun testCollatzSequenceLength() {
+        assertEquals(10, collatzSequenceLength(13))
+        assertEquals(2, collatzSequenceLength(2))
+        assertEquals(7, collatzSequenceLength(10))
+    }
+
 }

@@ -119,3 +119,30 @@ fun triangleNumberGenerator() = sequence<Long> {
         yield(previousTotal)
     }
 }
+
+/** Collatz sequence, start must be >= 2 */
+fun collatzSequenceGenerator(start: Long) = sequence {
+    yield(start)
+
+    var n = start
+    while (true) {
+        if (n % 2L == 0L) n /= 2L else n = 3 * n + 1
+        yield(n)
+
+        if (n == 1L) return@sequence
+    }
+}
+
+/** Collatz sequence length, start must be >= 2 */
+fun collatzSequenceLength(start: Long): Long {
+    var length = 1L
+
+    var n = start
+    while (true) {
+        if (n % 2L == 0L) n /= 2L else n = 3 * n + 1
+        length++
+
+        // have faith they all get to 1 eventually :)
+        if (n == 1L) return length
+    }
+}
