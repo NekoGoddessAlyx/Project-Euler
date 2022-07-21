@@ -1,3 +1,4 @@
+import java.math.BigInteger
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
@@ -58,6 +59,15 @@ class UtilsTest {
         assertEquals(10, collatzSequenceLength(13))
         assertEquals(2, collatzSequenceLength(2))
         assertEquals(7, collatzSequenceLength(10))
+    }
+
+    @Test fun testFactorial() {
+        assertEquals(BigInteger.ONE, factorial(0L))
+        assertEquals(BigInteger.ONE, factorial(1L))
+        assertEquals(BigInteger.valueOf(2), factorial(2L))
+        assertEquals(BigInteger.valueOf(6), factorial(3L))
+        assertEquals(BigInteger.valueOf(24), factorial(4L))
+        assertEquals(BigInteger.valueOf(3628800), factorial(10L))
     }
 
 }

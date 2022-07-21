@@ -1,3 +1,4 @@
+import java.math.BigInteger
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
@@ -145,4 +146,11 @@ fun collatzSequenceLength(start: Long): Long {
         // have faith they all get to 1 eventually :)
         if (n == 1L) return length
     }
+}
+
+fun factorial(n: Long): BigInteger = when {
+    n < 0 -> throw IllegalArgumentException("n must be a non-negative integer.")
+    n == 0L -> BigInteger.ONE
+    n == 1L -> BigInteger.ONE
+    else -> (2..n).fold(BigInteger.ONE) { acc, l -> acc * BigInteger.valueOf(l) }
 }
