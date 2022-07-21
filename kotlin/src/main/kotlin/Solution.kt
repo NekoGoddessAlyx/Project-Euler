@@ -30,21 +30,31 @@ fun main() {
     println("Project Euler")
     println("$solutionCount problem(s) have been solved.")
 
+    // presumably the most recently solved
+    // (and presumably solved)
+    val highestSolvedProblem = solutions.keys.maxOf { it }
+    println("Showing the most recently solved problem: $highestSolvedProblem")
+    printSolution(highestSolvedProblem)
+
     while (true) {
         print("Run solution (enter a number or anything else to quit): ")
         val input = readlnOrNull()?.toIntOrNull() ?: exitProcess(0)
 
-        val solver = getSolution(input)
-        if (solver == null) {
-            println(problemNumberAndLink(input))
-            println("No solution available for problem $input.")
-            continue
-        }
-
-        println(solver.toString())
-        val solution: String
-        val timeInMillis = measureTimeMillis { solution = solver.solve() }
-        println("Solution calculated in ${timeInMillis.toDouble() / 1000.0}s")
-        println(solution)
+        printSolution(input)
     }
+}
+
+private fun printSolution(solutionNumber: Int) {
+    val solver = getSolution(solutionNumber)
+    if (solver == null) {
+        println(problemNumberAndLink(solutionNumber))
+        println("No solution available for problem $solutionNumber.")
+        return
+    }
+
+    println(solver.toString())
+    val solution: String
+    val timeInMillis = measureTimeMillis { solution = solver.solve() }
+    println("Solution calculated in ${timeInMillis.toDouble() / 1000.0}s")
+    println(solution)
 }
