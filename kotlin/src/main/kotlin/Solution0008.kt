@@ -1,4 +1,4 @@
-class Solution0008 : Solution(8) {
+class Solution0008 : Solution() {
 
     private val number = """
         73167176531330624919225119674426574742355349194934

@@ -1,4 +1,4 @@
-class Solution0011 : Solution(11) {
+class Solution0011 : Solution() {
 
     // 2d grid implemented as a list within a list like so: grid[y][x]
     // NOTE THE [Y][X]

@@ -1,4 +1,4 @@
-class Solution0012 : Solution(12) {
+class Solution0012 : Solution() {
 
     override fun solve(): String {
         return triangleNumberGenerator()

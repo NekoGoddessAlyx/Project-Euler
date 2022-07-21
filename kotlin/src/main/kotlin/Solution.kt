@@ -1,8 +1,11 @@
 import kotlin.reflect.full.primaryConstructor
 import kotlin.system.exitProcess
+import kotlin.system.measureTimeMillis
 
 // Solution base class
-sealed class Solution(val problemNumber: Int) {
+sealed class Solution {
+
+    val problemNumber = this::class.simpleName?.slice(8 until 12)?.toIntOrNull() ?: throw Exception("Bad class name")
 
     override fun toString(): String = problemNumberAndLink(problemNumber)
 
@@ -39,6 +42,9 @@ fun main() {
         }
 
         println(solver.toString())
-        println(solver.solve())
+        val solution: String
+        val timeInMillis = measureTimeMillis { solution = solver.solve() }
+        println("Solution calculated in ${timeInMillis.toDouble() / 1000.0}s")
+        println(solution)
     }
 }

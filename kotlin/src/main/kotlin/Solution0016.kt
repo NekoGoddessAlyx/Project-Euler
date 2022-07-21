@@ -1,6 +1,6 @@
 import java.math.BigInteger
 
-class Solution0016 : Solution(16) {
+class Solution0016 : Solution() {
 
     override fun solve(): String {
         return BigInteger.TWO

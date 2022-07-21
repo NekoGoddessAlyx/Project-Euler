@@ -1,4 +1,4 @@
-class Solution0019 : Solution(19) {
+class Solution0019 : Solution() {
 
     private fun numDaysInMonth(year: Int, month: Int) = when (month) {
         0 -> 31 // jan

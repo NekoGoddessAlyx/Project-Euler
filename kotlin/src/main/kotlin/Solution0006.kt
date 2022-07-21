@@ -1,4 +1,4 @@
-class Solution0006 : Solution(6) {
+class Solution0006 : Solution() {
 
     override fun solve(): String {
         var squareOfSum = (1L..100L).sum()

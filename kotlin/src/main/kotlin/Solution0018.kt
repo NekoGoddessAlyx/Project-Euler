@@ -1,6 +1,6 @@
 import kotlin.math.max
 
-class Solution0018 : Solution(18) {
+class Solution0018 : Solution() {
 
     private val triangleString = """
         75

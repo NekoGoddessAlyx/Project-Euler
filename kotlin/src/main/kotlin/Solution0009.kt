@@ -1,4 +1,4 @@
-class Solution0009 : Solution(9) {
+class Solution0009 : Solution() {
 
     override fun solve(): String {
         for (a in 1L until 1000L) {

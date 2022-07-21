@@ -1,4 +1,4 @@
-class Solution0002 : Solution(2) {
+class Solution0002 : Solution() {
 
     override fun solve(): String {
         return fibGenerator()

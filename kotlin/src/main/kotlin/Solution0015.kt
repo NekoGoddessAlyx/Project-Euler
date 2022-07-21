@@ -1,4 +1,4 @@
-class Solution0015 : Solution(15) {
+class Solution0015 : Solution() {
 
     /*
      * (1, 0) can be restated as starting at (0, 0) with goal (19, 20)

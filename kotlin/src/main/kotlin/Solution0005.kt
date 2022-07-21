@@ -1,7 +1,7 @@
 import kotlin.math.max
 import kotlin.math.pow
 
-class Solution0005 : Solution(5) {
+class Solution0005 : Solution() {
 
     override fun solve(): String {
         return lcm((2L..20L)).toString()

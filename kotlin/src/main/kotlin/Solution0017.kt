@@ -1,4 +1,4 @@
-class Solution0017 : Solution(17) {
+class Solution0017 : Solution() {
 
     override fun solve(): String {
         return (1L..1000L)
