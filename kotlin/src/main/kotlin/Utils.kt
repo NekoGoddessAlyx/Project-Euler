@@ -66,6 +66,8 @@ fun getDivisors(n: Long): List<Long> {
     return factors.distinct()
 }
 
+fun getProperDivisors(n: Long): List<Long> = getDivisors(n).filter { it < n }
+
 fun getNumberOfDivisors(n: Long): Long {
     var numFactors = 0L
     var factor = 1L
