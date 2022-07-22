@@ -156,3 +156,8 @@ fun factorial(n: Long): BigInteger = when {
     n == 1L -> BigInteger.ONE
     else -> (2..n).fold(BigInteger.ONE) { acc, l -> acc * BigInteger.valueOf(l) }
 }
+
+/** n choose k. The number of combinations of n things taken k at a time */
+fun combination(n: Long, k: Long) : Long {
+    return (factorial(n) / (factorial(k) * factorial(n - k))).toLong()
+}

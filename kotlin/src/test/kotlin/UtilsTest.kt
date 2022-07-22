@@ -70,4 +70,11 @@ class UtilsTest {
         assertEquals(BigInteger.valueOf(3628800), factorial(10L))
     }
 
+    @Test fun testCombinations() {
+        assertEquals(1, combination(0, 0))
+        assertEquals(2, combination(2, 1))
+        assertEquals(6, combination(4, 2))
+        assertEquals(137846528820, combination(40, 20))
+    }
+
 }
