@@ -161,3 +161,45 @@ fun factorial(n: Long): BigInteger = when {
 fun combination(n: Long, k: Long) : Long {
     return (factorial(n) / (factorial(k) * factorial(n - k))).toLong()
 }
+
+/** Similar to combinations but the order matters (where it doesn't for combinations) */
+fun permutations(n: Long, k: Long) : Long {
+    return (factorial(n) / factorial(n - k)).toLong()
+}
+
+fun <T : Comparable<T>> orderedPermutationGenerator(input: Iterable<T>) = sequence {
+    val elements = input.toMutableList()
+    if (elements.isEmpty()) return@sequence
+    elements.sort()
+
+    var hasNext = true
+
+    while (hasNext) {
+        yield(elements.toList())
+
+        var k = 0
+        var l = 0
+        hasNext = false
+
+        for (i in elements.size - 1 downTo 1) {
+            if (elements[i] > elements[i - 1]) {
+                k = i - 1
+                hasNext = true
+                break
+            }
+        }
+
+        for (i in elements.size - 1 downTo k + 1) {
+            if (elements[i] > elements[k]) {
+                l = i
+                break
+            }
+        }
+
+        val t = elements[k]
+        elements[k] = elements[l]
+        elements[l] = t
+
+        elements.subList(k + 1, elements.size).reverse()
+    }
+}
