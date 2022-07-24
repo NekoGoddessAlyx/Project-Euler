@@ -158,12 +158,12 @@ fun factorial(n: Long): BigInteger = when {
 }
 
 /** n choose k. The number of combinations of n things taken k at a time */
-fun combination(n: Long, k: Long) : Long {
+fun combination(n: Long, k: Long): Long {
     return (factorial(n) / (factorial(k) * factorial(n - k))).toLong()
 }
 
 /** Similar to combinations but the order matters (where it doesn't for combinations) */
-fun permutations(n: Long, k: Long) : Long {
+fun permutations(n: Long, k: Long): Long {
     return (factorial(n) / factorial(n - k)).toLong()
 }
 
