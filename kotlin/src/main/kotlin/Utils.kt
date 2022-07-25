@@ -17,6 +17,21 @@ fun fibGenerator() = sequence {
         yield(next)
     }
 }
+/** Fibonacci sequence generator starting with 1 and 1 */
+fun bigFibGenerator() = sequence {
+    yield(BigInteger.ONE)
+
+    // seed values (will result in the first number being 1 and the second number being 2
+    var a = BigInteger.ZERO
+    var b = BigInteger.ONE
+
+    while (true) {
+        val next = a + b
+        a = b
+        b = next
+        yield(next)
+    }
+}
 
 fun sqrt(n: Long): Long = sqrt(n.toDouble()).toLong()
 

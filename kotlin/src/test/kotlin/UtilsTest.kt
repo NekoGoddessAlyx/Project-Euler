@@ -12,6 +12,22 @@ class UtilsTest {
     }
 
     @Test
+    fun testBigFibGenerator() {
+        val fibGenerator = bigFibGenerator()
+        assertContentEquals(
+            listOf(
+                BigInteger.ONE,
+                BigInteger.ONE,
+                BigInteger.TWO,
+                BigInteger.valueOf(3),
+                BigInteger.valueOf(5),
+                BigInteger.valueOf(8),
+                BigInteger.valueOf(13)
+            ), fibGenerator.take(7).toList()
+        )
+    }
+
+    @Test
     fun testGetPrimeFactors() {
         assertMapContentEquals(mapOf(2L to 2L, 3L to 2L, 31L to 1L), getPrimeFactors(1116L))
         assertMapContentEquals(mapOf(2L to 2L, 5L to 1L), getPrimeFactors(20L))
