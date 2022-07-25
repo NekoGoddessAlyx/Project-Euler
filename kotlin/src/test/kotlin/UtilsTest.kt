@@ -1,4 +1,6 @@
+import java.math.BigDecimal
 import java.math.BigInteger
+import java.math.RoundingMode
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
@@ -110,6 +112,42 @@ class UtilsTest {
             listOf("ABC", "ACB", "BAC", "BCA", "CAB", "CBA"),
             orderedPermutationsGenerator.take(6).map { String(it.toCharArray()) }.toList()
         )
+    }
+
+    @Test
+    fun testUnitFractionGenerator() {
+        val unitFractionGenerator = unitFractionGenerator()
+
+        val firstNine = unitFractionGenerator.take(9).map { it.toString() }.toList()
+        assertContentEquals(
+            listOf("0.5", "0.(3)", "0.25", "0.2", "0.1(6)", "0.(142857)", "0.125", "0.(1)", "0.1"),
+            firstNine
+        )
+
+        // check each number in the format:
+        // 0.(nonRepeatingFraction)(repeatingFraction)(repeatingFraction)(repeatingFraction)
+        unitFractionGenerator
+            .take(1_000)
+            .forEach {
+
+                // calculate the expected result using big decimal
+                val scale = it.nonRepeatingFraction.length + it.repeatingFraction.length * 3 + 2
+                val one = BigDecimal.ONE.setScale(scale, RoundingMode.UNNECESSARY)
+                val divisor = BigDecimal.valueOf(it.divisor)
+                var expected = (one / divisor).setScale(scale, RoundingMode.DOWN).toString()
+                expected = expected.slice(0 until expected.lastIndex - 1)
+
+                // build the actual representation
+                val actual = buildString {
+                    append("0.")
+                    append(it.nonRepeatingFraction)
+                    append(it.repeatingFraction)
+                    append(it.repeatingFraction)
+                    append(it.repeatingFraction)
+                }
+
+                assertEquals(expected, actual)
+            }
     }
 
 }

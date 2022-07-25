@@ -220,3 +220,87 @@ fun <T : Comparable<T>> orderedPermutationGenerator(input: Iterable<T>) = sequen
         elements.subList(k + 1, elements.size).reverse()
     }
 }
+
+/**
+ * Represents a number 1/[divisor]
+ *
+ * Contains a nonrepeating fractional part and a repeating fractional part as strings
+ * The full decimal representation can be calculated as
+ *
+ * `0.(nonRepeatingFraction)(repeatingFraction)(repeatingFraction)(repeatingFraction)(...)`
+ */
+data class UnitFraction(val divisor: Long, val nonRepeatingFraction: String, val repeatingFraction: String) {
+    override fun toString(): String = buildString {
+        append("0.")
+        append(nonRepeatingFraction)
+        if (repeatingFraction.isNotEmpty()) {
+            append("(")
+            append(repeatingFraction)
+            append(")")
+        }
+    }
+}
+
+/** Generates unit fractions (a number that contains a 1 in the numerator) starting from 2 */
+fun unitFractionGenerator() = sequence {
+    // the divisor (1/d)
+    var d = 2L
+
+    while (true) {
+        // digits will hold all digits
+        // if/when repeating digits are found, they will be removed and added to repeating digits
+        val digits = StringBuilder()
+        val remainders = mutableListOf<Long>()
+        val repeatingDigits = StringBuilder()
+
+        // dividend is the number to be continually divided to calculate the digits
+        var dividend = 10L
+
+        // dividend will be expanded (by 10) when necessary
+        // keep track of that in order to append a 0 digit when appropriate
+        var hadDigit = false
+
+        while (dividend != 0L) {
+            // expand the dividend if we can't neatly divide out the divisor
+            while (dividend < d) {
+                dividend *= 10L
+                if (!hadDigit) {
+                    digits.append(0)
+                    remainders += dividend
+                }
+                hadDigit = false
+            }
+
+            // calculate the remainder and divide out what we can
+            val remainder = dividend % d
+            val digit = (dividend - remainder) / d
+
+            // carry the remainder
+            dividend = remainder
+
+            // check if the current digit is already contained in the digits
+            // if so, we're done dividing as we've found a repeating cycle
+            val firstIndex = digits.indexOfFirst { it == digit.toString()[0] }
+            if (firstIndex != -1 && remainders[firstIndex] == remainder) {
+                if (firstIndex == digits.lastIndex || firstIndex == 0) {
+                    repeatingDigits.appendRange(digits, firstIndex, digits.length)
+                    digits.delete(firstIndex, digits.length)
+                    break
+                } else if (digits[firstIndex - 1] == digits.last() && remainders[firstIndex - 1] == remainders.last()) {
+                    repeatingDigits.appendRange(digits, firstIndex - 1, digits.length - 1)
+                    digits.delete(firstIndex - 1, digits.length)
+                    break
+                }
+            }
+
+            // otherwise, append the digit
+            digits.append(digit)
+            remainders += dividend
+            hadDigit = true
+
+            if (digits.length > 999) break
+        }
+
+        yield(UnitFraction(d++, digits.toString(), repeatingDigits.toString()))
+    }
+}
