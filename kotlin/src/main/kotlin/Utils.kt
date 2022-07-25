@@ -2,8 +2,10 @@ import java.math.BigInteger
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
-/** Fibonacci sequence generator starting with 1 and 2 */
+/** Fibonacci sequence generator starting with 1 and 1 */
 fun fibGenerator() = sequence {
+    yield(1)
+
     // seed values (will result in the first number being 1 and the second number being 2
     var a = 0
     var b = 1

@@ -8,7 +8,7 @@ class UtilsTest {
     @Test
     fun testFibGenerator() {
         val fibGenerator = fibGenerator()
-        assertContentEquals(listOf(1, 2, 3, 5, 8, 13), fibGenerator.take(6).toList())
+        assertContentEquals(listOf(1, 1, 2, 3, 5, 8, 13), fibGenerator.take(7).toList())
     }
 
     @Test
