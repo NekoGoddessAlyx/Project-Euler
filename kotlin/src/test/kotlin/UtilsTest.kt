@@ -131,11 +131,11 @@ class UtilsTest {
             .forEach {
 
                 // calculate the expected result using big decimal
-                val scale = it.nonRepeatingFraction.length + it.repeatingFraction.length * 3 + 2
+                val scale = it.nonRepeatingFraction.length + it.repeatingFraction.length * 3 + 3
                 val one = BigDecimal.ONE.setScale(scale, RoundingMode.UNNECESSARY)
                 val divisor = BigDecimal.valueOf(it.divisor)
                 var expected = (one / divisor).setScale(scale, RoundingMode.DOWN).toString()
-                expected = expected.slice(0 until expected.lastIndex - 1)
+                expected = expected.slice(0 until expected.lastIndex - 2)
 
                 // build the actual representation
                 val actual = buildString {
@@ -146,7 +146,7 @@ class UtilsTest {
                     append(it.repeatingFraction)
                 }
 
-                assertEquals(expected, actual)
+                assertEquals(expected, actual, "d = ${it.divisor} , $it")
             }
     }
 

@@ -17,6 +17,7 @@ fun fibGenerator() = sequence {
         yield(next)
     }
 }
+
 /** Fibonacci sequence generator starting with 1 and 1 */
 fun bigFibGenerator() = sequence {
     yield(BigInteger.ONE)
@@ -260,7 +261,7 @@ fun unitFractionGenerator() = sequence {
         // keep track of that in order to append a 0 digit when appropriate
         var hadDigit = false
 
-        while (dividend != 0L) {
+        main@while (dividend != 0L) {
             // expand the dividend if we can't neatly divide out the divisor
             while (dividend < d) {
                 dividend *= 10L
@@ -280,16 +281,18 @@ fun unitFractionGenerator() = sequence {
 
             // check if the current digit is already contained in the digits
             // if so, we're done dividing as we've found a repeating cycle
-            val firstIndex = digits.indexOfFirst { it == digit.toString()[0] }
-            if (firstIndex != -1 && remainders[firstIndex] == remainder) {
-                if (firstIndex == digits.lastIndex || firstIndex == 0) {
-                    repeatingDigits.appendRange(digits, firstIndex, digits.length)
-                    digits.delete(firstIndex, digits.length)
-                    break
-                } else if (digits[firstIndex - 1] == digits.last() && remainders[firstIndex - 1] == remainders.last()) {
-                    repeatingDigits.appendRange(digits, firstIndex - 1, digits.length - 1)
-                    digits.delete(firstIndex - 1, digits.length)
-                    break
+            for (index in digits.indices) {
+                val c = digits[index]
+                if (c == digit.toString()[0] && remainders[index] == remainder) {
+                    if (index == digits.lastIndex || index == 0) {
+                        repeatingDigits.appendRange(digits, index, digits.length)
+                        digits.delete(index, digits.length)
+                        break@main
+                    } else if (digits[index - 1] == digits.last()) {
+                        repeatingDigits.appendRange(digits, index - 1, digits.length - 1)
+                        digits.delete(index - 1, digits.length)
+                        break@main
+                    }
                 }
             }
 
@@ -297,8 +300,6 @@ fun unitFractionGenerator() = sequence {
             digits.append(digit)
             remainders += dividend
             hadDigit = true
-
-            if (digits.length > 999) break
         }
 
         yield(UnitFraction(d++, digits.toString(), repeatingDigits.toString()))
