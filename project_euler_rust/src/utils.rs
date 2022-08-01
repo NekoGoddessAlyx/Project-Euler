@@ -56,3 +56,39 @@ pub fn get_prime_factors(n: u64) -> HashMap<u64, u64> {
 
     factors
 }
+
+// digits
+
+pub fn get_digit(n: u64, i: u32) -> u32 {
+    let d = n / 10_u64.pow(i);
+    (d % 10) as u32
+}
+
+pub fn num_digits(n: u64) -> u32 {
+    if n == 0 { return 0; }
+    if n < 10 { return 1; }
+    if n < 100 { return 2; }
+    if n < 1000 { return 3; }
+    if n < 10000 { return 4; }
+    if n < 100000 { return 5; }
+    if n < 1000000 { return 6; }
+
+    let mut num_digits: u32 = 6;
+    let mut n = n / 1000000;
+    while n > 9 {
+        n /= 10;
+        num_digits += 1;
+    }
+
+    num_digits
+}
+
+// palindrome
+
+pub fn is_palindrome(n: u64) -> bool {
+    let num_digits = num_digits(n);
+    for i in 0..num_digits {
+        if get_digit(n, i) != get_digit(n, num_digits - 1 - i) { return false; }
+    }
+    true
+}
