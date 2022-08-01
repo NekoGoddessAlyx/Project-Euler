@@ -112,6 +112,12 @@ class UtilsTest {
             listOf("ABC", "ACB", "BAC", "BCA", "CAB", "CBA"),
             orderedPermutationsGenerator.take(6).map { String(it.toCharArray()) }.toList()
         )
+
+        val orderedPermutationsGenerator2 = orderedPermutationGenerator("ABC".toList(), 2)
+        assertContentEquals(
+            listOf("AB", "AC", "BA", "BC", "CA", "CB"),
+            orderedPermutationsGenerator2.take(6).map { String(it.toCharArray()) }.toList()
+        )
     }
 
     @Test

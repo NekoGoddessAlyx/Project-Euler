@@ -185,15 +185,17 @@ fun permutations(n: Long, k: Long): Long {
     return (factorial(n) / factorial(n - k)).toLong()
 }
 
-fun <T : Comparable<T>> orderedPermutationGenerator(input: Iterable<T>) = sequence {
+fun <T : Comparable<T>> orderedPermutationGenerator(input: Iterable<T>, choose: Int = -1) = sequence {
     val elements = input.toMutableList()
     if (elements.isEmpty()) return@sequence
     elements.sort()
 
+    val c = if (choose != -1) choose else elements.size
+
     var hasNext = true
 
     while (hasNext) {
-        yield(elements.toList())
+        yield(elements.subList(0, c))
 
         var k = 0
         var l = 0
