@@ -1,15 +1,18 @@
 use std::collections::HashMap;
 use crate::problem0001::problem0001;
 use crate::problem0002::problem0002;
+use crate::problem0003::problem0003;
 
 mod problem0001;
 mod problem0002;
 mod utils;
+mod problem0003;
 
 fn main() {
     let mut problems: HashMap<usize, fn() -> String> = HashMap::new();
     problems.insert(1, problem0001);
     problems.insert(2, problem0002);
+    problems.insert(3, problem0003);
 
     println!("Project Euler (rust edition)");
     println!("{} problem(s) have been solved.", problems.len());
