@@ -1,9 +1,9 @@
-use crate::register;
+// use crate::register;
+//
+// #[ctor::ctor]
+// fn register_problem0001() { register(1, problem0001); }
 
-#[ctor::ctor]
-fn register_problem0001() { register(1, problem0001); }
-
-fn problem0001() -> String {
+pub fn problem0001() -> String {
     let mut sum: u64 = 0;
 
     for i in 1..1000 {
