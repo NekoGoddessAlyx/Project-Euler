@@ -1,3 +1,4 @@
+use std::cmp::max;
 use std::collections::HashMap;
 
 // fibonacci generator
@@ -55,6 +56,26 @@ pub fn get_prime_factors(n: u64) -> HashMap<u64, u64> {
     }
 
     factors
+}
+
+// lcm (least common multiple)
+
+pub fn lcm(numbers: &mut impl Iterator<Item = u64>) -> u64 {
+    let mut factors = HashMap::new();
+
+    for n in numbers {
+        let n_factors = get_prime_factors(n);
+        for (k, v) in n_factors {
+            match factors.get_key_value(&k) {
+                None => factors.insert(k, v),
+                Some(x) => factors.insert(k, max(*x.1, v))
+            };
+        }
+    }
+
+    let mut n = 1_u64;
+    for (k, v) in factors { n *= k.pow(v as u32); }
+    n
 }
 
 // digits

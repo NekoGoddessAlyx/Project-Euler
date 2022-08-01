@@ -3,12 +3,14 @@ use crate::problem0001::problem0001;
 use crate::problem0002::problem0002;
 use crate::problem0003::problem0003;
 use crate::problem0004::problem0004;
+use crate::problem0005::problem0005;
 
 mod problem0001;
 mod problem0002;
 mod utils;
 mod problem0003;
 mod problem0004;
+mod problem0005;
 
 fn main() {
     let mut problems: HashMap<usize, fn() -> String> = HashMap::new();
@@ -16,6 +18,7 @@ fn main() {
     problems.insert(2, problem0002);
     problems.insert(3, problem0003);
     problems.insert(4, problem0004);
+    problems.insert(5, problem0005);
 
     println!("Project Euler (rust edition)");
     println!("{} problem(s) have been solved.", problems.len());
