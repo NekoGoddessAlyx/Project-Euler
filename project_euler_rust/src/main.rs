@@ -1,18 +1,25 @@
 use std::collections::HashMap;
 use crate::problem0001::problem0001;
+use crate::problem0002::problem0002;
 
 mod problem0001;
+mod problem0002;
+mod utils;
 
 fn main() {
-    let mut problems: HashMap<u32, fn() -> String> = HashMap::new();
+    let mut problems: HashMap<usize, fn() -> String> = HashMap::new();
     problems.insert(1, problem0001);
+    problems.insert(2, problem0002);
 
     println!("Project Euler (rust edition)");
     println!("{} problem(s) have been solved.", problems.len());
     println!();
 
-    let iter = problems.iter();
-    for (num, solver) in iter {
+    for num in 1..=problems.len() {
+        let solver = match problems.get(&num) {
+            None => continue,
+            Some(solver) => solver
+        };
         println!("Problem {} (https://projecteuler.net/problem={}): {}", num, num, solver())
     }
 }
