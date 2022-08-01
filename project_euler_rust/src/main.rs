@@ -2,6 +2,8 @@
 
 use std::cell::RefCell;
 
+mod problem0001;
+
 struct Problem {
     problem_number: u32,
     solver: fn() -> String,
