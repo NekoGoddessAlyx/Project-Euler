@@ -41,7 +41,7 @@ fn main() {
     problems.insert(3, problem0003);
     problems.insert(4, problem0004);
     problems.insert(5, problem0005);
-    problems.insert(600, problem0006);
+    problems.insert(6, problem0006);
 
     println!("Project Euler (rust edition)");
     println!("{} problem(s) have been solved.", problems.len());
