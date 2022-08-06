@@ -14,6 +14,7 @@ use crate::problem0007::problem0007;
 use crate::problem0008::problem0008;
 use crate::problem0009::problem0009;
 use crate::problem0010::problem0010;
+use crate::problem0011::problem0011;
 
 mod utils;
 mod problem0001;
@@ -26,6 +27,7 @@ mod problem0007;
 mod problem0008;
 mod problem0009;
 mod problem0010;
+mod problem0011;
 
 fn problems() -> HashMap<usize, fn() -> String> {
     let mut problems: HashMap<usize, fn() -> String> = HashMap::new();
@@ -39,6 +41,7 @@ fn problems() -> HashMap<usize, fn() -> String> {
     problems.insert(8, problem0008);
     problems.insert(9, problem0009);
     problems.insert(10, problem0010);
+    problems.insert(11, problem0011);
     problems
 }
 
