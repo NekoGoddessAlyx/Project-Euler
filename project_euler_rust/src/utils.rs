@@ -58,6 +58,45 @@ pub fn get_prime_factors(n: u64) -> HashMap<u64, u64> {
     factors
 }
 
+// divisors
+
+// pub fn get_divisors(n: u64) -> HashSet<u64> {
+//     let mut divisors: HashSet<u64> = HashSet::new();
+//
+//     let mut factor = 2_u64;
+//     let end = (n as f64).sqrt().ceil() as u64;
+//     while factor <= end {
+//         if n % factor == 0 {
+//             divisors.insert(factor);
+//             divisors.insert(n / factor);
+//             // divisors += factor;
+//             // divisors += n / factor;
+//         }
+//         factor += 1;
+//     }
+//
+//     divisors.insert(n);
+//
+//     divisors
+// }
+
+pub fn get_number_of_divisors(n: u64) -> u64 {
+    let mut num_divisors = 0_u64;
+
+    let mut factor = 1_u64;
+    let end = (n as f64).sqrt().ceil() as u64;
+    while factor < end {
+        if n % factor == 0 {
+            num_divisors += 2;
+        }
+        factor += 1;
+    }
+
+    if (n as f64).sqrt().powi(2) as u64 == n { num_divisors += 1; }
+
+    num_divisors
+}
+
 // lcm (least common multiple)
 
 pub fn lcm(numbers: &mut impl Iterator<Item = u64>) -> u64 {
@@ -148,4 +187,22 @@ impl Iterator for Prime {
 
 pub fn prime_generator() -> Prime {
     Prime(0)
+}
+
+// triangle number generator
+
+pub struct TriangleNumber(u64, u64);
+
+impl Iterator for TriangleNumber {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0 += 1;
+        self.1 += self.0;
+        Some(self.1)
+    }
+}
+
+pub fn triangle_number_generator() -> TriangleNumber {
+    TriangleNumber(1, 1)
 }
