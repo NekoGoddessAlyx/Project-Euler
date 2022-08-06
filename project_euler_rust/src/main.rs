@@ -1,3 +1,5 @@
+extern crate core;
+
 use std::collections::HashMap;
 use std::fmt::{Display, Formatter};
 use std::fs;
@@ -19,6 +21,7 @@ use crate::problem0012::problem0012;
 use crate::problem0013::problem0013;
 use crate::problem0014::problem0014;
 use crate::problem0015::problem0015;
+use crate::problem0016::problem0016;
 
 mod utils;
 mod problem0001;
@@ -36,6 +39,7 @@ mod problem0012;
 mod problem0013;
 mod problem0014;
 mod problem0015;
+mod problem0016;
 
 fn problems() -> HashMap<usize, fn() -> String> {
     let mut problems: HashMap<usize, fn() -> String> = HashMap::new();
@@ -54,6 +58,7 @@ fn problems() -> HashMap<usize, fn() -> String> {
     problems.insert(13, problem0013);
     problems.insert(14, problem0014);
     problems.insert(15, problem0015);
+    problems.insert(16, problem0016);
     problems
 }
 
