@@ -101,7 +101,7 @@ pub fn get_number_of_divisors(n: u64) -> u64 {
 
 // lcm (least common multiple)
 
-pub fn lcm(numbers: &mut impl Iterator<Item = u64>) -> u64 {
+pub fn lcm(numbers: &mut impl Iterator<Item=u64>) -> u64 {
     let mut factors = HashMap::new();
 
     for n in numbers {
@@ -243,4 +243,23 @@ pub fn collatz_sequence_length(n: u64) -> u64 {
         }
     }
     len
+}
+
+// combination
+
+pub fn combination(n: u64, k: u64) -> Option<u128> {
+    // https://en.wikipedia.org/wiki/Binomial_coefficient
+    let k = k.min(n - k) as u128;
+    let mut n = n as u128;
+
+    let mut c = 1u128;
+    let mut i = 1u128;
+    while i <= k {
+        // potential overflow
+        if c / i >= u128::MAX / n { return None }
+        c = c / i * n + c % i * n / i;
+        i += 1;
+        n -= 1;
+    }
+    Some(c)
 }
