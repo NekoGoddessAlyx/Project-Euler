@@ -9,6 +9,7 @@ use crate::problem0004::problem0004;
 use crate::problem0005::problem0005;
 use crate::problem0006::problem0006;
 use crate::problem0007::problem0007;
+use crate::problem0008::problem0008;
 
 mod problem0001;
 mod problem0002;
@@ -18,6 +19,7 @@ mod problem0004;
 mod problem0005;
 mod problem0006;
 mod problem0007;
+mod problem0008;
 
 fn main() {
     // wow
@@ -45,6 +47,7 @@ fn main() {
     problems.insert(5, problem0005);
     problems.insert(6, problem0006);
     problems.insert(7, problem0007);
+    problems.insert(8, problem0008);
 
     println!("Project Euler (rust edition)");
     println!("{} problem(s) have been solved.", problems.len());
