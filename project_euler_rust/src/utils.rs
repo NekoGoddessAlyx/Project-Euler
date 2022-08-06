@@ -1,5 +1,7 @@
+#![allow(dead_code)]
+
 use std::cmp::max;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 // fibonacci generator
 
@@ -60,25 +62,25 @@ pub fn get_prime_factors(n: u64) -> HashMap<u64, u64> {
 
 // divisors
 
-// pub fn get_divisors(n: u64) -> HashSet<u64> {
-//     let mut divisors: HashSet<u64> = HashSet::new();
-//
-//     let mut factor = 2_u64;
-//     let end = (n as f64).sqrt().ceil() as u64;
-//     while factor <= end {
-//         if n % factor == 0 {
-//             divisors.insert(factor);
-//             divisors.insert(n / factor);
-//             // divisors += factor;
-//             // divisors += n / factor;
-//         }
-//         factor += 1;
-//     }
-//
-//     divisors.insert(n);
-//
-//     divisors
-// }
+pub fn get_divisors(n: u64) -> HashSet<u64> {
+    let mut divisors: HashSet<u64> = HashSet::new();
+
+    let mut factor = 2_u64;
+    let end = (n as f64).sqrt().ceil() as u64;
+    while factor <= end {
+        if n % factor == 0 {
+            divisors.insert(factor);
+            divisors.insert(n / factor);
+            // divisors += factor;
+            // divisors += n / factor;
+        }
+        factor += 1;
+    }
+
+    divisors.insert(n);
+
+    divisors
+}
 
 pub fn get_number_of_divisors(n: u64) -> u64 {
     let mut num_divisors = 0_u64;
@@ -205,4 +207,40 @@ impl Iterator for TriangleNumber {
 
 pub fn triangle_number_generator() -> TriangleNumber {
     TriangleNumber(1, 1)
+}
+
+// collatz sequence
+
+pub struct CollatzSequence(u64);
+
+impl Iterator for CollatzSequence {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let result = self.0;
+        if self.0 % 2 == 0 {
+            self.0 /= 2;
+        } else {
+            self.0 = 3 * self.0 + 1;
+        }
+        Some(result)
+    }
+}
+
+pub fn collatz_sequence_generator(n: u64) -> CollatzSequence {
+    CollatzSequence(n)
+}
+
+pub fn collatz_sequence_length(n: u64) -> u64 {
+    let mut len = 1_u64;
+    let mut n = n;
+    while n != 1 {
+        len += 1;
+        if n % 2 == 0 {
+            n /= 2;
+        } else {
+            n = 3 * n + 1;
+        }
+    }
+    len
 }
