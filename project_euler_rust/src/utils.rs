@@ -113,3 +113,39 @@ pub fn is_palindrome(n: u64) -> bool {
     }
     true
 }
+
+// prime numbers
+
+pub fn is_prime(n: u64) -> bool {
+    if n == 2 || n == 3 { return true; }
+
+    if n <= 1 || n % 2 == 0 || n % 3 == 0 { return false; }
+
+    let mut i = 5;
+    while i * i <= n {
+        if n % i == 0 || n % (i + 2) == 0 { return false; }
+        i += 6;
+    }
+
+    true
+}
+
+// prime number generator
+
+pub struct Prime(u64);
+
+impl Iterator for Prime {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.0 == 2 { self.0 = 1; }
+        loop {
+            self.0 += 2;
+            if is_prime(self.0) { return Some(self.0); }
+        }
+    }
+}
+
+pub fn prime_generator() -> Prime {
+    Prime(0)
+}
